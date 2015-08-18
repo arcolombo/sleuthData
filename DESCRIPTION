@@ -1,0 +1,11 @@
+Package: sleuthData
+Version: 0.1
+Date: 2015-08-17
+Title: Example data for the `sleuth` package
+Author: Tim Triche, Jr. <tim.triche@gmail.com>
+Maintainer: Tim Triche, Jr. <tim.triche@gmail.com>
+Description: Data from GSE37704, accompanying Trapnell et al, Nat Biotech 2013
+License: Artistic-2.0
+Depends: sleuth, dplyr, biomaRt
+biocViews: ExperimentData, Homo_sapiens_Data, RNAseq
+NeedsCompilation: no
