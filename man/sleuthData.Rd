@@ -13,10 +13,10 @@ library(sleuth)
 library(sleuthData)
 
 ## find the data
+getkdir <- function(id) file.path(base_dir, "results", id, "kallisto")
 base_dir <- system.file("extdata", "", package="sleuthData")
 sample_id <- dir(file.path(base_dir,"results"))
-kal_dirs <- sapply(sample_id, 
-                   function(id) file.path(base_dir, "results", id, "kallisto"))
+kal_dirs <- sapply(sample_id, getkdir)
 
 ## map samples to covariates
 s2c <- read.table(file.path(base_dir, "hiseq_info.txt"), 
@@ -31,10 +31,12 @@ models(so)
 
 ## annotate transcripts
 library(biomaRt)
-mart <- biomaRt::useMart(biomart = "ensembl", dataset = "hsapiens_gene_ensembl")
+mart <- biomaRt::useMart(biomart = "ensembl", 
+                         dataset = "hsapiens_gene_ensembl")
 t2g <- biomaRt::getBM(attributes = c("ensembl_transcript_id", 
                                      "ensembl_gene_id",
-                                     "external_gene_name"), mart = mart)
+                                     "external_gene_name"), 
+                      mart = mart)
 t2g <- dplyr::rename(t2g, target_id = ensembl_transcript_id,
 ens_gene = ensembl_gene_id, ext_gene = external_gene_name)
 so <- sleuth_prep(kal_dirs, s2c, ~ condition, target_mapping = t2g)
