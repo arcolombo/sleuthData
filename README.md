@@ -7,4 +7,7 @@ source("http://bioconductor.org/biocLite.R")
 biocLite("devtools")  
 biocLite("pachterlab/sleuth")  
 biocLite("RamsinghLab/sleuthData")   
+
+library(sleuthData)
+?sleuthData
 ```
